@@ -18,6 +18,17 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
       zlib1g-dev \
       unzip
 
+# # set timezone
+# RUN sed -i.bak -e "s%http://archive.ubuntu.com/ubuntu/%http://ftp.jaist.ac.jp/pub/Linux/ubuntu/%g" /etc/apt/sources.list
+# ENV TZ Asia/Tokyo
+# RUN apt-get update \
+#   && apt-get install -y tzdata \
+#   && rm -rf /var/lib/apt/lists/* \
+#   && echo "${TZ}" > /etc/timezone \
+#   && rm /etc/localtime \
+#   && ln -s /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
+#   && dpkg-reconfigure -f noninteractive tzdata
+
 # Install ruby
 RUN echo 'gem: --no-document' >> /.gemrc
 RUN mkdir -p /tmp/ruby \
@@ -31,6 +42,9 @@ RUN mkdir -p /tmp/ruby \
   && rm -r /tmp/ruby
 
 RUN gem install --no-document bundler
+
+# Install MySQL Client
+RUN apt-get install -y mysql-client --no-install-recommends && apt-get install -y libmysqld-dev
 
 RUN apt-get install -y fonts-ipafont-gothic
 
@@ -61,3 +75,20 @@ RUN \
    rm -rf /tmp/appengine-java-sdk-${GAE_SDK_VERSION}.zip
 
 ENV PATH ${M2}:/usr/local/google/appengine-java-sdks/appengine-java-sdk-${GAE_SDK_VERSION}/bin:${PATH}
+
+# nodebrew + nodejs
+ENV HOME /root
+WORKDIR /root
+ENV NODE_VERSION 0.10.31
+RUN curl -L git.io/nodebrew | perl - setup
+ENV PATH $HOME/.nodebrew/current/bin:$PATH
+RUN echo 'export PATH=$HOME/.nodebrew/current/bin:$PATH' >> $HOME/.bashrc
+RUN nodebrew install-binary $NODE_VERSION
+RUN nodebrew use $NODE_VERSION
+
+# --unsafe-perm
+# https://github.com/Medium/phantomjs/issues/707#issuecomment-326380366
+RUN npm install -g phantomjs@2.1.1 --unsafe-perm
+
+# golang
+RUN apt-get install -y golang
