@@ -18,17 +18,6 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
       zlib1g-dev \
       unzip
 
-# # set timezone
-# RUN sed -i.bak -e "s%http://archive.ubuntu.com/ubuntu/%http://ftp.jaist.ac.jp/pub/Linux/ubuntu/%g" /etc/apt/sources.list
-# ENV TZ Asia/Tokyo
-# RUN apt-get update \
-#   && apt-get install -y tzdata \
-#   && rm -rf /var/lib/apt/lists/* \
-#   && echo "${TZ}" > /etc/timezone \
-#   && rm /etc/localtime \
-#   && ln -s /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
-#   && dpkg-reconfigure -f noninteractive tzdata
-
 # Install ruby
 RUN echo 'gem: --no-document' >> /.gemrc
 RUN mkdir -p /tmp/ruby \
@@ -92,3 +81,21 @@ RUN npm install -g phantomjs@2.1.1 --unsafe-perm
 
 # golang
 RUN apt-get install -y golang
+
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+qt5-default \
+libqt5webkit5-dev \
+gstreamer1.0-plugins-base \
+gstreamer1.0-tools \
+gstreamer1.0-x
+
+# set timezone
+RUN sed -i.bak -e "s%http://archive.ubuntu.com/ubuntu/%http://ftp.jaist.ac.jp/pub/Linux/ubuntu/%g" /etc/apt/sources.list
+ENV TZ Asia/Tokyo
+RUN apt-get update \
+  && apt-get install -y tzdata \
+  && rm -rf /var/lib/apt/lists/* \
+  && echo "${TZ}" > /etc/timezone \
+  && rm /etc/localtime \
+  && ln -s /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
+  && dpkg-reconfigure -f noninteractive tzdata
