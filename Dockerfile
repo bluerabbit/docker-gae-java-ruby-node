@@ -8,6 +8,7 @@ ENV RUBY_MAJOR="2.3" \
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
       build-essential \
       curl \
+      wget \
       libffi-dev \
       libgdbm-dev \
       libncurses-dev \
@@ -31,3 +32,10 @@ RUN mkdir -p /tmp/ruby \
 RUN gem install --no-document bundler
 
 RUN apt-get install -y fonts-ipafont-gothic
+
+# install openjdk-7
+# add-apt-repositoryコマンドが必要であるためsoftware-properties-commonをインストールする
+RUN apt-get install -y software-properties-common &&\
+    add-apt-repository ppa:openjdk-r/ppa -y &&\
+    apt-get update &&\
+    apt-get install -y openjdk-7-jdk
