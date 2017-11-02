@@ -99,3 +99,10 @@ RUN apt-get update \
   && rm /etc/localtime \
   && ln -s /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
   && dpkg-reconfigure -f noninteractive tzdata
+
+# lang
+RUN apt-get update && apt-get install -y language-pack-ja
+RUN update-locale LANG=ja_JP.UTF-8 LC_ALL=ja_JP.UTF-8
+
+# git
+RUN apt-get update && apt-get install -y git
