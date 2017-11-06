@@ -30,6 +30,9 @@ RUN mkdir -p /tmp/ruby \
   && gem update --system \
   && rm -r /tmp/ruby
 
+# git
+RUN apt-get update && apt-get install -y git
+
 RUN gem install --no-document bundler
 
 # Install MySQL Client
@@ -104,5 +107,3 @@ RUN apt-get update \
 RUN apt-get update && apt-get install -y language-pack-ja
 RUN update-locale LANG=ja_JP.UTF-8 LC_ALL=ja_JP.UTF-8
 
-# git
-RUN apt-get update && apt-get install -y git
