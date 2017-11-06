@@ -33,7 +33,7 @@ RUN mkdir -p /tmp/ruby \
 # git
 RUN apt-get update && apt-get install -y git
 
-RUN gem install --no-document bundler
+# RUN gem install --no-document bundler
 
 # Install MySQL Client
 RUN apt-get install -y mysql-client --no-install-recommends && apt-get install -y libmysqld-dev
