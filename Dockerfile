@@ -97,8 +97,9 @@ gstreamer1.0-x
 # set timezone
 RUN sed -i.bak -e "s%http://archive.ubuntu.com/ubuntu/%http://ftp.jaist.ac.jp/pub/Linux/ubuntu/%g" /etc/apt/sources.list
 ENV TZ Asia/Tokyo
-RUN apt-get update \
-  && apt-get install -y tzdata \
+RUN apt-add-repository ppa:justinludwig/tzdata \
+  && apt-get update \
+  && apt-get install -y tzdata tzdata-java \
   && rm -rf /var/lib/apt/lists/* \
   && echo "${TZ}" > /etc/timezone \
   && rm /etc/localtime \
