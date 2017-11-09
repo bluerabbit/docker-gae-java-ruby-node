@@ -84,6 +84,7 @@ RUN npm install -g phantomjs@2.1.1 --unsafe-perm
 
 # golang
 RUN apt-get install -y golang
+RUN mkdir $HOME/.go
 ENV GOPATH $HOME/.go
 ENV PATH  $GOPATH/bin:$PATH
 
