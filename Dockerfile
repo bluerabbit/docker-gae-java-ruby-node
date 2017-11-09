@@ -84,6 +84,8 @@ RUN npm install -g phantomjs@2.1.1 --unsafe-perm
 
 # golang
 RUN apt-get install -y golang
+ENV GOPATH $HOME/.go
+ENV PATH  $GOPATH/bin:$PATH
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
 qt5-default \
