@@ -24,14 +24,14 @@ RUN sudo apt-get update \
          fonts-ipafont-gothic \
          software-properties-common \
          openjdk-7-jdk \
-    && wget http://www.us.apache.org/dist/maven/maven-3/3.1.1/binaries/apache-maven-3.1.1-bin.zip \
+    && wget http://www.us.apache.org/dist/maven/maven-3/3.1.1/binaries/apache-maven-3.1.1-bin.zip -P /tmp/ \
     && sudo mkdir -p /usr/local/apache-maven \
-    && sudo unzip apache-maven-3.1.1-bin.zip -d /usr/local/apache-maven/ \
+    && sudo unzip /tmp/apache-maven-3.1.1-bin.zip -d /usr/local/apache-maven/ \
     && rm -rf /tmp/apache-maven-3.1.1-bin.zip \
-    && wget http://storage.googleapis.com/appengine-sdks/featured/appengine-java-sdk-1.9.54.zip \
+    && wget http://storage.googleapis.com/appengine-sdks/featured/appengine-java-sdk-1.9.54.zip -P /tmp/ \
     && sudo mkdir -p /usr/local/google/appengine-java-sdk \
-    && sudo unzip appengine-java-sdk-1.9.54.zip -d /usr/local/google/appengine-java-sdks/ \
-    && rm -rf appengine-java-sdk-1.9.54.zip \
+    && sudo unzip /tmp/appengine-java-sdk-1.9.54.zip -d /usr/local/google/appengine-java-sdks/ \
+    && rm -rf /tmp/appengine-java-sdk-1.9.54.zip \
     && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
          qt5-default \
          libqt5webkit5-dev \
