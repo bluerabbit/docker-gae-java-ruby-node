@@ -6,6 +6,12 @@ ENV M2_HOME /usr/local/apache-maven/apache-maven-3.1.1
 ENV M2 /usr/local/apache-maven/apache-maven-3.1.1/bin
 
 RUN sudo apt-get update \
+    && sudo apt-get install task-japanese \
+    && sudo sh -c "echo ja_JP.UTF-8 UTF-8 > /etc/locale.gen" \
+    && sudo locale-gen \
+    && sudo update-locale LANG=ja_JP.UTF-8
+
+RUN sudo apt-get update \
     && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
          build-essential \
          curl \
@@ -37,7 +43,7 @@ RUN sudo apt-get update \
          libqt5webkit5-dev \
          gstreamer1.0-plugins-base \
          gstreamer1.0-tools \
-         gstreamer1.0-x\
+         gstreamer1.0-x \
     && sudo sed -i.bak -e "s%http://archive.ubuntu.com/ubuntu/%http://ftp.jaist.ac.jp/pub/Linux/ubuntu/%g" /etc/apt/sources.list \
     && sudo apt-get install -y tzdata tzdata-java \
     && sudo rm -rf /var/lib/apt/lists/* \
@@ -45,10 +51,6 @@ RUN sudo apt-get update \
     && sudo rm /etc/localtime \
     && sudo ln -s /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
     && sudo dpkg-reconfigure -f noninteractive tzdata \
-    && sudo apt-get update && sudo apt-get install task-japanese \
-    && sudo sh -c "echo ja_JP.UTF-8 UTF-8 > /etc/locale.gen" \
-    && sudo locale-gen \
-    && sudo update-locale LANG=ja_JP.UTF-8 \
     && curl -L git.io/nodebrew | perl - setup \
     && export PATH=$HOME/.nodebrew/current/bin:$PATH \
     && echo 'export PATH=$HOME/.nodebrew/current/bin:$PATH' >> $HOME/.bashrc \
