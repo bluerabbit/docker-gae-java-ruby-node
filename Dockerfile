@@ -59,7 +59,7 @@ RUN echo 'export PATH=$HOME/.nodebrew/current/bin:$PATH' >> $HOME/.bashrc
 ENV PATH $M2:/usr/local/google/appengine-java-sdks/appengine-java-sdk-1.9.54/bin:$HOME/.nodebrew/current/bin:$PATH
 
 # golang
-RUN apt-get install -y golang
+RUN sudo apt-get install -y golang
 RUN mkdir $HOME/.go
 ENV GOPATH $HOME/.go
 ENV PATH  $GOPATH/bin:$PATH
