@@ -54,5 +54,16 @@ RUN sudo apt-get update \
 
 RUN curl -L git.io/nodebrew | perl - setup
 ENV PATH $HOME/.nodebrew/current/bin:$PATH
+RUN echo 'export PATH=$HOME/.nodebrew/current/bin:$PATH' >> $HOME/.bashrc
 
 ENV PATH $M2:/usr/local/google/appengine-java-sdks/appengine-java-sdk-1.9.54/bin:$HOME/.nodebrew/current/bin:$PATH
+
+# golang
+RUN apt-get install -y golang
+RUN mkdir $HOME/.go
+ENV GOPATH $HOME/.go
+ENV PATH  $GOPATH/bin:$PATH
+
+# --unsafe-perm
+# https://github.com/Medium/phantomjs/issues/707#issuecomment-326380366
+RUN npm install -g phantomjs@2.1.1 --unsafe-perm
