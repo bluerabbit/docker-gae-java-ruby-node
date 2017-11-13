@@ -51,11 +51,8 @@ RUN sudo apt-get update \
     && sudo rm /etc/localtime \
     && sudo ln -s /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
     && sudo dpkg-reconfigure -f noninteractive tzdata \
-    && curl -L git.io/nodebrew | perl - setup \
-    && export PATH=$HOME/.nodebrew/current/bin:$PATH \
-    && echo 'export PATH=$HOME/.nodebrew/current/bin:$PATH' >> $HOME/.bashrc \
-    && nodebrew install-binary 0.10.31 \
-    && nodebrew use 0.10.31 \
-    && npm install -g phantomjs@2.1.1 --unsafe-perm
+
+RUN curl -L git.io/nodebrew | perl - setup
+ENV PATH $HOME/.nodebrew/current/bin:$PATH
 
 ENV PATH $M2:/usr/local/google/appengine-java-sdks/appengine-java-sdk-1.9.54/bin:$HOME/.nodebrew/current/bin:$PATH
