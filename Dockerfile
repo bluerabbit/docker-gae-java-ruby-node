@@ -60,7 +60,7 @@ ENV PATH $M2:/usr/local/google/appengine-java-sdks/appengine-java-sdk-1.9.54/bin
 
 # golang
 RUN sudo add-apt-repository ppa:gophers/archive -y
-RUN sudo apt update
+RUN sudo apt update || true
 RUN sudo apt-get install -y golang
 RUN mkdir $HOME/.go
 ENV GOPATH $HOME/.go
