@@ -68,4 +68,4 @@ ENV PATH  $GOPATH/bin:$PATH
 
 # --unsafe-perm
 # https://github.com/Medium/phantomjs/issues/707#issuecomment-326380366
-RUN npm install -g phantomjs@2.1.1 --unsafe-perm
+# RUN npm install -g phantomjs@2.1.1 --unsafe-perm
