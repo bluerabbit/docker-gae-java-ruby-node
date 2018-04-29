@@ -29,7 +29,7 @@ RUN sudo apt-get update \
          libmysqld-dev \
          fonts-ipafont-gothic \
          software-properties-common \
-         openjdk-7-jdk \
+         openjdk-8-jdk \
     && wget http://www.us.apache.org/dist/maven/maven-3/3.1.1/binaries/apache-maven-3.1.1-bin.zip -P /tmp/ \
     && sudo mkdir -p /usr/local/apache-maven \
     && sudo unzip /tmp/apache-maven-3.1.1-bin.zip -d /usr/local/apache-maven/ \
