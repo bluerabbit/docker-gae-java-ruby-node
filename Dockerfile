@@ -53,15 +53,15 @@ RUN sudo apt-get update \
     && sudo dpkg-reconfigure -f noninteractive tzdata
 
 RUN sudo wget git.io/nodebrew && perl nodebrew setup
-ENV PATH $HOME/.nodebrew/current/bin:$PATH
-RUN echo 'export PATH=$HOME/.nodebrew/current/bin:$PATH' >> $HOME/.bashrc
+ENV PATH /home/circleci/.nodebrew/current/bin:$PATH
+RUN echo 'export PATH=/home/circleci/.nodebrew/current/bin:$PATH' >> /home/circleci/.bashrc
 
-ENV PATH $M2:/usr/local/google/appengine-java-sdks/appengine-java-sdk-1.9.54/bin:$HOME/.nodebrew/current/bin:$PATH
+ENV PATH $M2:/usr/local/google/appengine-java-sdks/appengine-java-sdk-1.9.54/bin:$PATH
 
 # golang
 RUN sudo add-apt-repository ppa:gophers/archive -y
 RUN sudo apt update || true
 RUN sudo apt-get install -y golang
-RUN mkdir $HOME/.go
-ENV GOPATH $HOME/.go
+RUN mkdir /home/circleci/.go
+ENV GOPATH /home/circleci/.go
 ENV PATH  $GOPATH/bin:$PATH
