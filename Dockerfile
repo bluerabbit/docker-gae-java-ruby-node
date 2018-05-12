@@ -50,7 +50,7 @@ RUN sudo apt-get update \
     && sudo sh -c "echo Asia/Tokyo > /etc/timezone" \
     && sudo rm /etc/localtime \
     && sudo ln -s /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
-    && sudo dpkg-reconfigure -f noninteractive tzdata \
+    && sudo dpkg-reconfigure -f noninteractive tzdata
 
 RUN sudo wget git.io/nodebrew && perl nodebrew setup
 ENV PATH $HOME/.nodebrew/current/bin:$PATH
