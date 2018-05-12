@@ -52,7 +52,7 @@ RUN sudo apt-get update \
     && sudo ln -s /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
     && sudo dpkg-reconfigure -f noninteractive tzdata \
 
-RUN curl -L git.io/nodebrew | perl - setup
+RUN sudo wget git.io/nodebrew && perl nodebrew setup
 ENV PATH $HOME/.nodebrew/current/bin:$PATH
 RUN echo 'export PATH=$HOME/.nodebrew/current/bin:$PATH' >> $HOME/.bashrc
 
