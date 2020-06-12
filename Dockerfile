@@ -24,12 +24,16 @@ RUN sudo apt-get update \
          libyaml-dev \
          zlib1g-dev \
          unzip \
-    && sudo apt-get install -y mysql-client --no-install-recommends \
-    && sudo apt-get install -y \
-         libmysqld-dev \
+    && sudo apt-get install -y default-mysql-client --no-install-recommends
+# RUN sudo apt-get install software-properties-common && sudo apt-add-repository ppa:openjdk-r/ppa && sudo apt-get update && sudo apt-get install -y openjdk-8-jdk
+RUN sudo apt-get install software-properties-common
+RUN wget -O- https://apt.corretto.aws/corretto.key | sudo apt-key add -
+RUN sudo add-apt-repository 'deb https://apt.corretto.aws stable main'
+RUN sudo apt-get update; sudo apt-get install -y java-1.8.0-amazon-corretto-jdk
+RUN sudo apt-get install -y \
+         default-libmysqlclient-dev \
          fonts-ipafont-gothic \
          software-properties-common \
-         openjdk-8-jdk \
     && wget http://www.us.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.zip -P /tmp/ \
     && sudo mkdir -p /usr/local/apache-maven \
     && sudo unzip /tmp/apache-maven-3.6.3-bin.zip -d /usr/local/apache-maven/ \
@@ -45,7 +49,7 @@ RUN sudo apt-get update \
          gstreamer1.0-tools \
          gstreamer1.0-x \
     && sudo sed -i.bak -e "s%http://archive.ubuntu.com/ubuntu/%http://ftp.jaist.ac.jp/pub/Linux/ubuntu/%g" /etc/apt/sources.list \
-    && sudo apt-get install -y tzdata tzdata-java \
+    && sudo apt-get install -y tzdata \
     && sudo rm -rf /var/lib/apt/lists/* \
     && sudo sh -c "echo Asia/Tokyo > /etc/timezone" \
     && sudo rm /etc/localtime \
